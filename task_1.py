@@ -31,6 +31,7 @@ class Teacher:
         return f"{self.__name} провел консультацию в классе {classname}"
 
 
+#Heir class
 class DisciplineTeacher(Teacher):
     def __init__(self, name, education, experience, discipline, job_title):
         super().__init__(name, education, experience)
@@ -43,22 +44,30 @@ class DisciplineTeacher(Teacher):
     def get_job_title(self):
         return self.__job_title
 
+    #methods
+    def get_teacher_data(self):
+        return f"{super().get_teacher_data()}\nПредмет: {self.__discipline}, должность: {self.__job_title}"
 
+    def add_mark(self, student, grade):
+        return f"{super().add_mark(student, grade)}.\nПредмет: {self.__discipline}"
+
+    def remove_mark(self, student, grade):
+        return f"{super().remove_mark(student, grade)}.\nПредмет: {self.__discipline}"
+
+    def give_a_consultation(self, cls):
+        return (f"{super().give_a_consultation(cls)}.\nПо предмету"
+                f" {self.__discipline} как {self.__job_title}")
+
+
+#object
 dis = DisciplineTeacher("Эйбел Херциг", "Стэнфордский университет", 4,
                         "Python", "Директор вышки")
 
 dis.set_experience(8)
-print(f"Имя: {dis.get_name()}")
-print(f"Образование: {dis.get_education()}")
-print(f"Опыт работы: {dis.get_experience()} года")
+print(dis.get_teacher_data())
 print()
-
-print(f"{dis.get_teacher_data()}.\nПредмет {dis.get_discipline()},"
-      f" должность {dis.get_job_title()}")
+print(dis.add_mark("Лукас", 5))
 print()
-print(f"{dis.add_mark("Лукас", 5)}. Предмет: {dis.get_discipline()}")
+print(dis.remove_mark("Jonh", 3))
 print()
-print(f"{dis.remove_mark("John", 3)}. Предмет: {dis.get_discipline()}")
-print()
-print(f"{dis.give_a_consultation("KC-15")}. По предмету {dis.get_discipline()}"
-      f" как {dis.get_job_title()}")
+print(dis.give_a_consultation("KC-15"))
